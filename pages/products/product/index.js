@@ -58,7 +58,7 @@ const getproduct = (props) => {
 export default getproduct;
 
 export async function getStaticProps() {
-  const response = await axios.get("http://localhost:8000/foodigolist");
+  const response = await axios.get("https://fyp-website-server.onrender.com/foodigolist");
   return {
     props: {
       data: response.data,

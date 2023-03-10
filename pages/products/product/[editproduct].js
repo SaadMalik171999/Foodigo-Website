@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import Header from "../../../components/Header";
 import { Col, Form, Row, Input, Button, message } from "antd";
-import "bootstrap/dist/css/bootstrap.min.css"; 
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const editproduct = () => {
   const router = useRouter();
@@ -18,32 +18,30 @@ const editproduct = () => {
     productName: "",
   });
 
-  
+
   useEffect(() => {
-    
+
     handleRetrieveData();
   }, [editproduct])
-  
+
 
   const handleChange = (e) => {
-    if(e.target.name === "companyPrice" || e.target.name === "companyProductStock"){
-        setData({ ...Data, [e.target.name]: e.target.valueAsNumber });
+    if (e.target.name === "companyPrice" || e.target.name === "companyProductStock") {
+      setData({ ...Data, [e.target.name]: e.target.valueAsNumber });
     }
-    else{
+    else {
       debugger
-        setData({ ...Data, [e.target.name]: e.target.value });
+      setData({ ...Data, [e.target.name]: e.target.value });
     }
-   
+
   };
 
-  
+
 
   const handleFinish = async () => {
-    debugger
-    console.log(Data,"Data");
     try {
       const response = await axios.put(
-        `http://localhost:8000/foodigolist/${Data?._id}`,
+        `https://fyp-website-server.onrender.com/foodigolist/${Data?._id}`,
         { Data }
       );
       if (response) {
@@ -58,16 +56,16 @@ const editproduct = () => {
 
   const handleRetrieveData = async () => {
     try {
-       if(editproduct){
-      const response = await axios.get(
-        `http://localhost:8000/foodigolist/${editproduct}`
-      );
-      if (response) {
-        setData(response.data);
-        message.success("Product Retrieved");
+      if (editproduct) {
+        const response = await axios.get(
+          `https://fyp-website-server.onrender.com/foodigolist/${editproduct}`
+        );
+        if (response) {
+          setData(response.data);
+          message.success("Product Retrieved");
+        }
       }
-    }
-      
+
     } catch (error) {
       message.error("Something Went Wrong");
     }
@@ -90,7 +88,7 @@ const editproduct = () => {
                   required
                   rules={[{ required: true }]}
                 >
-                  <Input type="text" name="productName" value={Data?.productName} onChange={handleChange}  />    </Form.Item>
+                  <Input type="text" name="productName" value={Data?.productName} onChange={handleChange} />    </Form.Item>
               </Col>
 
               <Col className="p-1" xs={24} md={24} lg={8}>
@@ -99,7 +97,7 @@ const editproduct = () => {
                   required
                   rules={[{ required: true }]}
                 >
-                  <Input type="text" name="productCategory"    value = {Data?.productCategory} onChange={handleChange}   />
+                  <Input type="text" name="productCategory" value={Data?.productCategory} onChange={handleChange} />
                 </Form.Item>
               </Col>
 
@@ -109,7 +107,7 @@ const editproduct = () => {
                   required
                   rules={[{ required: true }]}
                 >
-                  <Input type="text" name="companyName" disabled value = {Data?.companyName} onChange={handleChange}  />
+                  <Input type="text" name="companyName" disabled value={Data?.companyName} onChange={handleChange} />
                 </Form.Item>
               </Col>
 
@@ -119,7 +117,7 @@ const editproduct = () => {
                   required
                   rules={[{ required: true }]}
                 >
-                  <Input type="number" name="companyPrice" value = {Data?.companyPrice} onChange={handleChange}  />
+                  <Input type="number" name="companyPrice" value={Data?.companyPrice} onChange={handleChange} />
                 </Form.Item>
               </Col>
 
@@ -129,7 +127,7 @@ const editproduct = () => {
                   required
                   rules={[{ required: true }]}
                 >
-                  <Input type="number" name="companyProductStock" value = {Data?.companyProductStock} onChange={handleChange}  />
+                  <Input type="number" name="companyProductStock" value={Data?.companyProductStock} onChange={handleChange} />
                 </Form.Item>
               </Col>
 
@@ -139,7 +137,7 @@ const editproduct = () => {
                   required
                   rules={[{ required: true }]}
                 >
-                  <Input type="text" name="productImage" value={Data?.productImage} onChange={handleChange}  />
+                  <Input type="text" name="productImage" value={Data?.productImage} onChange={handleChange} />
                 </Form.Item>
               </Col>
             </Row>
